@@ -27,7 +27,16 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    <img src="uploads/{{ Session::get('profile_pic') }}" class="rounded-circle" style="width:70px; height:70px;">
+                @foreach ($users as $user)
+                    {{ $user->name }}
+                @endforeach
+                    @if( Session('pic_extension'))
+                        <img src="images/{{ pic_extension }}">
+                    @endif
+
+                    @if( !Session('pic_extension'))
+                        <img src="images/avatar1.png" class="rounded-circle" style="width:70px; height:70px;">
+                    @endif
                 </div>
             </div>
         </div>

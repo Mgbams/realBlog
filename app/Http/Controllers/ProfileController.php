@@ -29,15 +29,22 @@ class ProfileController extends Controller
         $profile->name = $request->input('name');
         $profile->designation = $request->input('designation');
         $profile->user_id = Auth::user()->id;
-        $fileName = time().'.'.$request->profile_pic->extension();  
-   
+        // $fileName = time().'.'.$request->profile_pic->extension();  
+        $fileName = $profile->user_id . '.' . $request->profile_pic->extension();  
         $request->profile_pic->move(public_path('uploads'), $fileName);
         $profile->profile_pic = $fileName; // saving the fileName in our model for upload to database
+
+        // This is done to organise the picture for display on home page
+        $extension =  $profile->user_id . $request->profile_pic->extension();
+
         $profile->save();
    
         return redirect('home')
             ->with('success','You have successfully upload file.')
-            ->with('profile_pic',$fileName);
+            ->with([
+                'profile_pic' => $fileName,
+                'pic_extension' => $extension
+                ]);
             // The second with method is only used if am displaying images on 
             // the site as they are uploaded so i transfer the image from my controller using the above method
     }
