@@ -209,9 +209,9 @@ Where ModelName is the name of your model.
 ## Alert box with close button
 
 ```bash
-    <div class="alert alert-success alert-block">
+     <div class="alert alert-success alert-block" style="height:40px;">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Successfully Submitted</strong>
+        <strong>{{ $message }}</strong>
     </div>
 ```
 

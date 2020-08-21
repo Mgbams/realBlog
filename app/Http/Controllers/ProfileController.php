@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $profile->profile_pic = $fileName; // saving the fileName in our model for upload to database
         $profile->save();
    
-        return back()
+        return redirect('home')
             ->with('success','You have successfully upload file.')
             ->with('profile_pic',$fileName);
             // The second with method is only used if am displaying images on 
