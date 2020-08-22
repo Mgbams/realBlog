@@ -25,14 +25,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
+                {{ $users->profile_pic }} 
                 <div class="card-body">
-                @foreach ($users as $user)
-                    {{ $user->name }}
-                @endforeach
-                    @if( Session('pic_extension'))
-                        <img src="images/{{ pic_extension }}">
-                    @endif
+                        <img src="uploads/{{ $users->profile_pic }} " class="rounded-circle" style="width:70px; height:70px;">
 
                     @if( !Session('pic_extension'))
                         <img src="images/avatar1.png" class="rounded-circle" style="width:70px; height:70px;">

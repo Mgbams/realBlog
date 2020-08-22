@@ -34,18 +34,13 @@ class ProfileController extends Controller
         $request->profile_pic->move(public_path('uploads'), $fileName);
         $profile->profile_pic = $fileName; // saving the fileName in our model for upload to database
 
-        // This is done to organise the picture for display on home page
-        $extension =  $profile->user_id . $request->profile_pic->extension();
-
+        // dd($profile);
         $profile->save();
-   
+
         return redirect('home')
             ->with('success','You have successfully upload file.')
             ->with([
-                'profile_pic' => $fileName,
-                'pic_extension' => $extension
+                'profile_pic' => $fileName
                 ]);
-            // The second with method is only used if am displaying images on 
-            // the site as they are uploaded so i transfer the image from my controller using the above method
     }
 }
