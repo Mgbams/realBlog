@@ -25,12 +25,18 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-                {{ $users->profile_pic }} 
                 <div class="card-body">
-                    @if ($users->profile_pic )
-                        <img src="uploads/{{ $users->profile_pic }} " class="rounded-circle" style="width:70px; height:70px;">
-                    @elseif( !$users->profile_pic )
+                    @if (!empty($profiles) )
+                        <img src="uploads/{{ $profiles->profile_pic }} " class="rounded-circle" style="width:70px; height:70px;">
+                    @else
                         <img src="images/avatar1.png" class="rounded-circle" style="width:70px; height:70px;">
+                    @endif
+
+                    @if (!empty($profiles) )
+                        <p class="lead"> {{ $profiles->name }} </p>
+                        <p> {{ $profiles->designation }} </p>
+                    @else
+                        <p></p>
                     @endif
                 </div>
             </div>
