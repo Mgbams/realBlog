@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; //  I added this to combat undefined type Auth error
 use App\Profile;
-use Auth;
 
 class ProfileController extends Controller
 {

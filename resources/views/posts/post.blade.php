@@ -10,7 +10,7 @@
                 <div class="card-post_body pt-3 pb-3">
 
                     <div class="row">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ url('/addPost') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -47,8 +47,11 @@
                                 <div class="col-md-6">
                                     <select id="category_id" type="category_id" class="form-control @error('category_id') is-invalid @enderror" name="category_id" required autocomplete="category_id">
                                         <option value="">Select</option>
-                                        <option value="">Technology</option>
-                                        <option value="">Entertainment</option>
+                                        @if(count($categories) > 0)
+                                        @foreach($categories->all() as $category)
+                                        <option value="{{$category->id}}">{{$category->category}}</option>
+                                        @endforeach
+                                        @endif
                                     </select>
 
                                     @error('category_id')
