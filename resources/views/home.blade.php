@@ -39,6 +39,19 @@
                         <p></p>
                     @endif
                 </div>
+
+                <div class="col-md-8">
+                    @if(count($posts) > 0)
+                        @foreach($posts->all() as $post)
+                            <h4>{{$post->post_title}}</h4>
+                            <img src="posts/{{$post->post_image}}" style="height: 100px; width: 100px;" class=" mx-auto d-block img-responsive rounded-circle" alt=""/>
+                            <p>{{$post->post_body}}</p>
+                            <hr />
+                        @endforeach
+                    @else
+                        <p>No posts available</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

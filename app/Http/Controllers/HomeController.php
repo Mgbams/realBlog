@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; //  I added this to combat undefined type Auth error
 use App\User;
+use App\Post;
 use App\Profile;
-use Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -27,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $posts = Post::all();
         $auth = Auth::user()->id;
         $profile =  DB::table('users')
                 ->join('profiles', 'users.id', '=', 'profiles.user_id')
@@ -34,6 +36,6 @@ class HomeController extends Controller
                 ->where(['profiles.user_id' => $auth])
                 ->first();
        
-        return view('home', ['profiles' => $profile]);
+        return view('home', ['profiles' => $profile, 'posts' => $posts]);
     }
 }
