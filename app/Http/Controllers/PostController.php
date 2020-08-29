@@ -27,7 +27,7 @@ class PostController extends Controller
             'post_title' => 'required',
             'post_body' => 'required',
             'category_id' => 'required',
-            'post_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'post_image' => 'required'
         ]);
 
         $posts = new Post;
@@ -44,9 +44,8 @@ class PostController extends Controller
             $posts->post_image = $fileName; // saving the fileName in our model for upload to database
         }
         
-
-        // dd($profile);
         $posts->save();
-        return $request->input('post_title');
+        return redirect('/home')->with('success', 'Posts published successfully');
+        //return 'Validation passed';
     }
 }

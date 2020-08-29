@@ -10,7 +10,7 @@
                 <div class="card-post_body pt-3 pb-3">
 
                     <div class="row">
-                        <form method="POST" action="{{ url('/addPost') }}">
+                        <form method="POST" action="{{ url('/addPost') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
