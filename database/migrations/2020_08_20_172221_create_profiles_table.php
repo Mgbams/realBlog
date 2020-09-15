@@ -14,12 +14,20 @@ class CreateProfilesTable extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
+           // $table->increments('id');
+            //$table->integer('user_id');
+            //$table->string('name');
+            //$table->text('designation');
+            //$table->string('profile_pic');
+
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('name');
-            $table->text('designation');
-            $table->string('profile_pic');
+            $table->unsignedBigInteger('user_id');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
+
+            $table->index('user_id'); // This shows that user_id is a foreign key
         });
     }
 

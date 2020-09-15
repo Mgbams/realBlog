@@ -13,12 +13,18 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($user)
     {
-        return view('profiles.profile');
+        //dd($user);
+
+        $user = \App\User::findorFail($user);
+
+        return view('profiles.index', [
+            "user" => $user
+        ]);
     }
 
-    public function addProfile(Request $request) {
+   /* public function addProfile(Request $request) {
         $this->validate($request, [
             'name' => 'required',
             'designation' => 'required',
@@ -42,5 +48,5 @@ class ProfileController extends Controller
             ->with([
                 'profile_pic' => $fileName
                 ]);
-    }
+    }*/
 }

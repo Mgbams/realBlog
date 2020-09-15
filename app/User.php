@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'username', 'password',
     ];
 
     /**
@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile() {//profile is singular here because a user can have only one profile
+        return $this->hasOne(Profile::class);
+    }
+
+    public function posts() { //post is plural here because a user can have many posts
+        return $this->hasMany(Post::class);
+    }
 }

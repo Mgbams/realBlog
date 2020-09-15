@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; //  I added this to combat undefined type Auth error
 
@@ -23,13 +24,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 // Pages i created
 
-Route::get('/profile', 'ProfileController@index');
-Route::get('/post', 'PostController@index');
-Route::get('/category', 'CategoryController@index');
-Route::post('/addCategory', 'CategoryController@addCategory');
-Route::post('/addProfile', 'ProfileController@addProfile');
-Route::post('/addPost', 'PostController@addPost');
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
+//Route::get('/post', 'PostController@index');
+Route::get('/p/create', 'PostsController@create');
+Route::post('/p', 'PostsController@store');
+
