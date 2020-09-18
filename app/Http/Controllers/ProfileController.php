@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; //  I added this to combat undefined type Auth error
 use App\Profile;
@@ -24,7 +25,40 @@ class ProfileController extends Controller
         ]);
     }
 
-   /* public function addProfile(Request $request) {
+    public function edit(\App\User $user)
+    { // Another way of getting the users
+        $this->authorize('update', $user->profile); //Protecting route
+        return view('profiles.edit', compact('user'));
+    }
+
+    public function update(\App\User $user)
+    {
+        $this->authorize('update', $user->profile); //Protecting route
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'url' => 'url',
+            'image' => ''
+        ]);
+
+        if (request('image')) {
+
+            $imagePath = request('image')->store('profile', 'public'); //Path to our image
+
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
+            $image->save();
+        }
+
+        $user->profile->update(array_merge(
+            $data,
+            ['image' => $imagePath]
+        ));
+
+        // dd($data);
+        return redirect("/profile/{$user->id}");
+    }
+
+    /* public function addProfile(Request $request) {
         $this->validate($request, [
             'name' => 'required',
             'designation' => 'required',

@@ -28,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::findorfail(auth()->user()->id);
+        //dd($user);
+        return view('welcome', [
+            'user' => $user
+        ]);
     }
 }
