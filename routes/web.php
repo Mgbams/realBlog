@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/follow/{user}', 'FollowsController@store');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Pages i created

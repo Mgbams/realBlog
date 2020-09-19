@@ -3,12 +3,16 @@
 @section('content')
 <div class="container">
     <div class="col-3 pt-5">
-        <img src="/storage/{{$user->profile->image}}" alt="freecodecamp image" class="rounded-circle w-100"  />
+        <img src="{{$user->profile->profileImage()}}" alt="freecodecamp image" class="rounded-circle w-100"  />
     </div>
 
     <div class="col-9 pt-5">
         <div class="d-flex justify-content-between align-items-baseline">
-            <h1>{{$user->username}}</h1>
+            <div class="d-flex align-items-center pb-2">
+                <div class="h2">{{$user->username}}</div>
+               {{-- Using a vue component --}}
+                <button-component user-id='{{$user->id}}'></button-component>
+            </div>
             @can ('update', $user->profile)
             <a href="/p/create">Add new posts</a>
             @endcan
